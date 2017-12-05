@@ -1,5 +1,3 @@
-#include <Overlay/OgreOverlayManager.h>
-#include <Overlay/OgreOverlayElement.h>
 #include "App.h"
 
 App::App() : OgreBites::ApplicationContext("BasicApp") {
@@ -50,7 +48,7 @@ void App::setup(void)  {
 	Root* root = getRoot();
 
 	//root->showConfigDialog();
-	scnMgr = root->createSceneManager();
+	scnMgr = root->createSceneManager("DefaultSceneManager");
 	addInputListener(this);
 	RTShader::ShaderGenerator* shadergen = RTShader::ShaderGenerator::getSingletonPtr();
 	shadergen->addSceneManager(scnMgr);
