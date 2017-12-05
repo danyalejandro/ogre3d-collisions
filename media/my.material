@@ -1,0 +1,28 @@
+material Solid/WhitePixel
+{
+   receive_shadows off
+   technique
+   {
+      pass
+      {
+         //point_sprites on
+         //polygon_mode points
+         point_size 20
+         lighting off
+         diffuse vertexcolour
+      }
+   }
+}
+
+material Simple/Red
+{
+    technique {
+        pass {
+            lighting on
+
+            texture_unit {
+                texture mat_dirt.jpg
+            }
+        }
+    }
+}
