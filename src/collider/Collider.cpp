@@ -2,9 +2,21 @@
 // Created by danyalejandro on 05/12/17.
 //
 
+#include <iomanip>
 #include "Collider.h"
 
-void Collider::averageCenter() {
+
+Collider::Collider() {
+	std::cout << "Collider() constructor" << std::endl;
+	X = 0.0;
+	V = 0.0;
+	A = 0.0;
+	F = 0.0;
+	m = 1.0; // never 0!
+}
+
+// set the center average position from the vertices
+void Collider::setCenterFromVertices() {
 	if (vertices.size() > 0) {
 		for (const Vector3 &v : vertices) {
 			X += v;
@@ -12,17 +24,29 @@ void Collider::averageCenter() {
 		X /= double(vertices.size());
 	}
 	else {
-		X = 0;
+		X = 0.0;
 	}
+	
+	node->setPosition(X); // update node
 }
 
 void Collider::step() {
-	Vector3 d(0.1, 0.0, 0.0);
-	X += d;
-
+	// integrate
+	std::cout << "A = " << std::setw(10) <<  A << "; V = " << std::setw(10) <<  V << "; X = " << std::setw(10) <<  X << "; m = " << m << std::endl;
+	
+	A = F / m;
+	V += A;
+	X += V;
+	
+	
+	
+	// update vertices
 	for (Vector3 &p : vertices) {
-		p += d;
+		p += V;
 	}
+	
+	// update node
+	node->setPosition(X);
 }
 
 // creates an edge from references to the vertices at indexes specified

@@ -18,8 +18,6 @@ public:
 	Cuboid(SceneManager &scnMgr, std::string materialName);
 	void setVertices(Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3, Vector3 p4, Vector3 p5, Vector3 p6, Vector3 p7);
 	void addQuadVertices(Vector3 &p0, Vector3 &p1, Vector3 &p2, Vector3 &p3);
-	void step();
-
 };
 
 

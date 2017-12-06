@@ -1,6 +1,15 @@
 #include "ColCuboid.h"
 
-ColCuboid::ColCuboid(Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3, Vector3 p4, Vector3 p5, Vector3 p6, Vector3 p7) {
+
+ColCuboid::ColCuboid() : Collider() {
+	std::cout << "ColCuboid() constructor" << std::endl;
+}
+
+
+ColCuboid::ColCuboid(SceneNode* node, Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3, Vector3 p4, Vector3 p5, Vector3 p6, Vector3 p7) : Collider() {
+	this->node = node;
+	
+	std::cout << "ColCuboid(things) constructor" << std::endl;
 	// store vertices
 	addVertice(p0);
 	addVertice(p1);
@@ -12,7 +21,7 @@ ColCuboid::ColCuboid(Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3, Vector3 p4,
 	addVertice(p7);
 
 	// compute center position and initialize center position coords from vertices
-	averageCenter();
+	setCenterFromVertices();
 
 	// store edges (try to follow counter-clockwise order)
 	addEdge(0,1);

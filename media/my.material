@@ -14,14 +14,14 @@ material Solid/WhitePixel
    }
 }
 
-material Simple/Red
+material Simple/UVic
 {
     technique {
         pass {
             lighting on
 
             texture_unit {
-                texture mat_dirt.jpg
+                texture logo-uvic.jpg
             }
         }
     }

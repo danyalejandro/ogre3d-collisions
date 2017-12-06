@@ -19,6 +19,7 @@ class App : public OgreBites::ApplicationContext, public OgreBites::InputListene
 	SceneManager* scnMgr;
 	CamGuy camGuy;
 	Manager man;
+	std::vector<Cuboid> cuboids;
 
 	float camMouseSpeed = 0.4f;
 	bool firstFrame = true;

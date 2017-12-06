@@ -78,11 +78,21 @@ void App::createObjects() {
 	SceneNode* node = scnMgr->getRootSceneNode()->createChildSceneNode();
 	node->attachObject(ninjaEntity);*/
 	man = Manager();
-
-	Cuboid cub(*scnMgr, "Simple/Red");
-	cub.setVertices(Vector3(0,0,0),Vector3(80,0,0),Vector3(100,100,0),Vector3(0,100,0),
-					Vector3(0,0,-100),Vector3(90,0,-100),Vector3(100,50,-100),Vector3(0,100,-100));
-	man.addCollider(&cub.collider);
+	
+	Cuboid c1 = Cuboid(*scnMgr, "Simple/UVic");
+	c1.setVertices(Vector3(0,0,0),Vector3(100,0,0),Vector3(100,100,0),Vector3(0,100,0),
+					Vector3(0,0,-100),Vector3(100,0,-100),Vector3(100,100,-100),Vector3(0,100,-100));
+	c1.collider.V = Vector3(0.5, 0.00, 0.0);
+	cuboids.push_back(c1);
+	man.addCollider(&cuboids.at(0).collider);
+	
+	cuboids.push_back(Cuboid(*scnMgr, "Simple/UVic"));
+	Cuboid &c2 = cuboids.at(1);
+	c2.setVertices(Vector3(0,0,0),Vector3(100,0,0),Vector3(100,100,0),Vector3(0,100,0),
+							  Vector3(0,0,-100),Vector3(100,0,-100),Vector3(100,100,-100),Vector3(0,100,-100));
+	//c2.collider.X = Vector3(0.0, 0.0, 0.0);
+	//c2.collider.F = Vector3(-0.01, 0.01, 0.0);
+	//man.addCollider(&c2.collider);
 	
 	// ground
 	Plane plane(Vector3::UNIT_Y, 0);

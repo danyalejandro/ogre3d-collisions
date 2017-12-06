@@ -6,7 +6,7 @@
  */
 Cuboid::Cuboid(SceneManager &scnMgr, std::string materialName) {
 	node = scnMgr.getRootSceneNode()->createChildSceneNode();
-	manual = scnMgr.createManualObject("manual");
+	manual = scnMgr.createManualObject();
 	this->materialName = materialName;
 }
 
@@ -35,7 +35,7 @@ void Cuboid::addQuadVertices(Vector3 &p0, Vector3 &p1, Vector3 &p2, Vector3 &p3)
 // stores vertices and sets up the manual object
 void Cuboid::setVertices(Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3, Vector3 p4, Vector3 p5, Vector3 p6, Vector3 p7) {
 	// set up collider
-	collider = ColCuboid(p0, p1, p2, p3, p4, p5, p6, p7);
+	collider = ColCuboid(node, p0, p1, p2, p3, p4, p5, p6, p7);
 
 	// add points to manual object in the order received
 	manual->begin(materialName, RenderOperation::OT_TRIANGLE_LIST);
@@ -51,11 +51,4 @@ void Cuboid::setVertices(Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3, Vector3
 	manual->end();
 	((Ogre::VertexData*)(manual->getEdgeList()->edgeGroups.at(0).vertexData))->prepareForShadowVolume();
 	node->attachObject(manual);
-}
-
-
-// Updates physics variables
-// Reaction to a frame step
-void Cuboid::step() {
-	collider.step();
 }
