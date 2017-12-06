@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.8)
 project(ogre3d-collisions)
 set(CMAKE_CXX_STANDARD 14)
 
-set(SOURCE_FILES src/config.h src/main.cpp src/app/App.cpp src/app/App.h src/app/CamGuy.cpp src/app/CamGuy.h src/mesh/Cuboid.cpp src/mesh/Cuboid.h src/collider/ColCuboid.cpp src/collider/ColCuboid.h src/collider/Quad.cpp src/collider/Quad.h)
+set(SOURCE_FILES src/config.h src/main.cpp src/app/App.cpp src/app/App.h src/app/CamGuy.cpp src/app/CamGuy.h src/mesh/Cuboid.cpp src/mesh/Cuboid.h src/collider/ColCuboid.cpp src/collider/ColCuboid.h src/collider/Quad.cpp src/collider/Quad.h src/collider/Collider.cpp src/collider/Collider.h src/collider/Manager.cpp src/collider/Manager.h)
 
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 

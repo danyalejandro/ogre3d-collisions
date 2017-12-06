@@ -4,22 +4,10 @@
  * First 4 points should be one of the faces, the next 4 points should be the opposite face
  * Both faces' points should be entered in counter-clockwise order
  */
-Cuboid::Cuboid(SceneManager &scnMgr, std::vector<Vector3> &points, std::string materialName) {
-	this->vertice = points;
+Cuboid::Cuboid(SceneManager &scnMgr, std::string materialName) {
+	node = scnMgr.getRootSceneNode()->createChildSceneNode();
 	manual = scnMgr.createManualObject("manual");
-	manual->begin(materialName, RenderOperation::OT_TRIANGLE_LIST);
-
-	// add points in the order received
-	addQuadVertices(points.at(0), points.at(1), points.at(2), points.at(3));
-	addQuadVertices(points.at(4), points.at(7), points.at(6), points.at(5));
-	addQuadVertices(points.at(1), points.at(5), points.at(6), points.at(2));
-	addQuadVertices(points.at(0), points.at(3), points.at(7), points.at(4));
-	addQuadVertices(points.at(3), points.at(2), points.at(6), points.at(7));
-	addQuadVertices(points.at(0), points.at(4), points.at(5), points.at(1));
-
-	manual->setCastShadows(true);
-	manual->end();
-	((Ogre::VertexData*)(manual->getEdgeList()->edgeGroups.at(0).vertexData))->prepareForShadowVolume();
+	this->materialName = materialName;
 }
 
 // p1, p2, p3 and p4 describe a quad face in counter-clockwise order
@@ -42,4 +30,32 @@ void Cuboid::addQuadVertices(Vector3 &p0, Vector3 &p1, Vector3 &p2, Vector3 &p3)
 
 	manual->triangle(i0, i0 + 1, i0 + 2);
 	manual->triangle(i0 + 3, i0 + 4, i0 + 5);
+}
+
+// stores vertices and sets up the manual object
+void Cuboid::setVertices(Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3, Vector3 p4, Vector3 p5, Vector3 p6, Vector3 p7) {
+	// set up collider
+	collider = ColCuboid(p0, p1, p2, p3, p4, p5, p6, p7);
+
+	// add points to manual object in the order received
+	manual->begin(materialName, RenderOperation::OT_TRIANGLE_LIST);
+
+	addQuadVertices(p0, p1, p2, p3);
+	addQuadVertices(p4, p7, p6, p5);
+	addQuadVertices(p1, p5, p6, p2);
+	addQuadVertices(p0, p3, p7, p4);
+	addQuadVertices(p3, p2, p6, p7);
+	addQuadVertices(p0, p4, p5, p1);
+
+	manual->setCastShadows(true);
+	manual->end();
+	((Ogre::VertexData*)(manual->getEdgeList()->edgeGroups.at(0).vertexData))->prepareForShadowVolume();
+	node->attachObject(manual);
+}
+
+
+// Updates physics variables
+// Reaction to a frame step
+void Cuboid::step() {
+	collider.step();
 }

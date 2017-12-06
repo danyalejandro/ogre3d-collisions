@@ -3,15 +3,18 @@
 
 #include <Ogre.h>
 #include <vector>
+#include "Collider.h"
 
 using Ogre::Vector3;
 using Ogre::Plane;
 
 // Collider shaped as a cuboid (6 faces)
-class ColCuboid {
-	std::array<Vector3, 8> vertices; // 8 vertices in order: 4 front face, 4 back face counter-clockwise (same as Cuboid mesh)
-	std::array<std::pair<Vector3*, Vector3*>, 12> edges; // 12 edges, made from pointers to vertices
-	std::array<std::vector<Vector3*>, 6> faces;
+class ColCuboid : public Collider {
+public:
+	//std::array<std::vector<Vector3*>, 6> faces;
+
+	ColCuboid() = default;
+	ColCuboid(Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3, Vector3 p4, Vector3 p5, Vector3 p6, Vector3 p7);
 };
 
 

@@ -1,4 +1,5 @@
 #include "App.h"
+#include "../collider/Manager.h"
 
 App::App() : OgreBites::ApplicationContext("BasicApp") {
 	camGuy = CamGuy();
@@ -22,6 +23,7 @@ bool App::keyReleased(const OgreBites::KeyboardEvent& evt)  {
 }
 
 bool App::frameRenderingQueued(const FrameEvent &evt) {
+	man.nextFrame();
 	camGuy.processFrame(evt.timeSinceLastFrame);
 	return ApplicationContext::frameRenderingQueued(evt);
 }
@@ -72,20 +74,15 @@ void App::createLights() {
 
 void App::createObjects() {
 	//ninja
-	Entity* ninjaEntity = scnMgr->createEntity("ninja.mesh");
+	/*Entity* ninjaEntity = scnMgr->createEntity("ninja.mesh");
 	SceneNode* node = scnMgr->getRootSceneNode()->createChildSceneNode();
-	node->attachObject(ninjaEntity);
-	
-	// create ManualObject
-	//Line3D(scnMgr, Vector3(0,0,0), Vector3(100,100,100));
-	//Point3D(scnMgr, Vector3(100,100,100));
-	
-	// spring
-	//springs.push_back(LinearSpring(&physNodes[0], &physNodes[1], 10));
-	std::vector<Vector3> points = { Vector3(0,0,0),Vector3(80,0,0),Vector3(100,100,0),Vector3(0,100,0),
-							   Vector3(0,0,-100),Vector3(90,0,-100),Vector3(100,50,-100),Vector3(0,100,-100)};
-	Cuboid cub(*scnMgr, points, "Simple/Red");
-	scnMgr->getRootSceneNode()->createChildSceneNode()->attachObject(cub.manual);
+	node->attachObject(ninjaEntity);*/
+	man = Manager();
+
+	Cuboid cub(*scnMgr, "Simple/Red");
+	cub.setVertices(Vector3(0,0,0),Vector3(80,0,0),Vector3(100,100,0),Vector3(0,100,0),
+					Vector3(0,0,-100),Vector3(90,0,-100),Vector3(100,50,-100),Vector3(0,100,-100));
+	man.addCollider(&cub.collider);
 	
 	// ground
 	Plane plane(Vector3::UNIT_Y, 0);

@@ -8,6 +8,7 @@
 #include "CamGuy.h"
 #include "../config.h"
 #include "../mesh/Cuboid.h"
+#include "../collider/Manager.h"
 
 
 using namespace Ogre;
@@ -17,6 +18,8 @@ class App : public OgreBites::ApplicationContext, public OgreBites::InputListene
 	SceneNode* camNode;
 	SceneManager* scnMgr;
 	CamGuy camGuy;
+	Manager man;
+
 	float camMouseSpeed = 0.4f;
 	bool firstFrame = true;
 
