@@ -2,7 +2,7 @@
 #define OGRECAM_APP_H
 
 #include <Ogre.h>
-#include <OgreApplicationContext.h>
+#include <Bites/OgreApplicationContext.h>
 #include <OgreResourceGroupManager.h>
 #include "Sample.h"
 #include "CamGuy.h"

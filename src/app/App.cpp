@@ -23,7 +23,26 @@ bool App::keyReleased(const OgreBites::KeyboardEvent& evt)  {
 }
 
 bool App::frameRenderingQueued(const FrameEvent &evt) {
-	man.nextFrame();
+	int n, steps = 1 / CONFIG_DT;
+	auto it1 = cuboids.begin();
+	auto it2 = it1 + 1;
+	char colissionIndex = 0;
+	
+	for (n = 0 ; n < steps ; n++) {
+		while (it1 != cuboids.end()) {
+			it1->collider.step();
+			it2 = it1 + 1;
+			while (it2 != cuboids.end()) {
+				colissionIndex = it1->collider.collidedWith(it2->collider);
+				if (colissionIndex > 0) {
+					it1->collider.collisionResponse(colissionIndex, it2->collider);
+				}
+				it2++;
+			}
+		}
+		it1++;
+	}
+	
 	camGuy.processFrame(evt.timeSinceLastFrame);
 	return ApplicationContext::frameRenderingQueued(evt);
 }
@@ -73,42 +92,16 @@ void App::createLights() {
 
 
 void App::createObjects() {
-	//ninja
-	/*Entity* ninjaEntity = scnMgr->createEntity("ninja.mesh");
-	SceneNode* node = scnMgr->getRootSceneNode()->createChildSceneNode();
-	node->attachObject(ninjaEntity);*/
-	man = Manager();
-	
 	Cuboid c1 = Cuboid(*scnMgr, "Simple/UVic");
-	c1.setVertices(Vector3(0,0,0),Vector3(100,0,0),Vector3(100,100,0),Vector3(0,100,0),
-					Vector3(0,0,-100),Vector3(100,0,-100),Vector3(100,100,-100),Vector3(0,100,-100));
+	c1.setVertices(Vector3(0,0,0),Vector3(100,0,0),Vector3(100,100,0),Vector3(0,100,0), Vector3(0,0,-100),Vector3(100,0,-100),Vector3(100,100,-100),Vector3(0,100,-100));
 	c1.collider.V = Vector3(0.5, 0.00, 0.0);
 	cuboids.push_back(c1);
-	man.addCollider(&cuboids.at(0).collider);
 	
 	cuboids.push_back(Cuboid(*scnMgr, "Simple/UVic"));
 	Cuboid &c2 = cuboids.at(1);
-	c2.setVertices(Vector3(0,0,0),Vector3(100,0,0),Vector3(100,100,0),Vector3(0,100,0),
-							  Vector3(0,0,-100),Vector3(100,0,-100),Vector3(100,100,-100),Vector3(0,100,-100));
-	//c2.collider.X = Vector3(0.0, 0.0, 0.0);
-	//c2.collider.F = Vector3(-0.01, 0.01, 0.0);
-	//man.addCollider(&c2.collider);
+	c2.setVertices(Vector3(0,0,0),Vector3(100,0,0),Vector3(100,100,0),Vector3(0,100,0), Vector3(0,0,-100),Vector3(100,0,-100),Vector3(100,100,-100),Vector3(0,100,-100));
 	
-	// ground
-	Plane plane(Vector3::UNIT_Y, 0);
-	MeshManager::getSingleton().createPlane(
-			"ground",
-			ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
-			plane,
-			1500, 1500,
-			20, 20,
-			true,
-			1, 5, 5,
-			Vector3::UNIT_Z);
-	Entity* groundEntity = scnMgr->createEntity("ground");
-	groundEntity->setCastShadows(false);
-	groundEntity->setMaterialName("Examples/Rockwall");
-	scnMgr->getRootSceneNode()->createChildSceneNode()->attachObject(groundEntity);
+	
 }
 
 void App::createCamera() {

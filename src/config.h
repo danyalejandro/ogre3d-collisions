@@ -3,8 +3,6 @@
 
 #define CONFIG_FPS 60
 #define CONFIG_DT 1
-#define CONFIG_SPRING_KS 0.0250
-#define CONFIG_SPRING_KD 0.0004
 #define CONFIG_GRAVITY  -0.0080
 
 #endif //OGRECAM_CONFIG_H
