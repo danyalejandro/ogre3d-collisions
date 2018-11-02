@@ -2,7 +2,7 @@
 
 A simple implementation of a 3D rigid body collision engine with support for cuboid colliders built with OGRE3D. It was built as my final project for a course on *Fundamentals of Physics-Based Animation*, and is a partial implementation of the paper *"Dynamic collision detection using oriented bounding boxes" (2008, D Eberly)* which is based on the SIGGRAPH paper *"OBBTree: A Hierarchical Structure for Rapid Interference Detection" (1996, Gottschalk et al.)*. 
 
-*Note: I published this code for demonstrative purposes only. There's a more complete implementation of OBB collisions in https://github.com/RandyGaul/qu3e which does what I was expecting from this project (after 4 years of work). Also, although I was a fan of the OGRE3D project, I wouldn't recommend it anymore since the project seems to be fading out.*
+*Note: I published this code for demonstrative purposes only. There's a more complete implementation of OBB collisions in https://github.com/RandyGaul/qu3e which does what I was expecting from this project (after 4 years of work). Also, although I was a fan of the OGRE3D project, I wouldn't recommend it anymore as the project appears to be fading out.*
 
 [![Simulation Youtube video](https://img.youtube.com/vi/-T7ay-Wlm1U/0.jpg)](https://www.youtube.com/watch?v=-T7ay-Wlm1U)
 
