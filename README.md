@@ -8,7 +8,7 @@ A simple implementation of a 3D rigid body collision engine with support for cub
 
 *(click image for youtube video)*
 
-For an in-depth technical report on this project, please download the **[Project Final Report](https://github.com/danyalejandro/ogre3d-collisions/blob/master/computer-animation-project.pdf)**.
+For an in-depth technical report on this project, please download the unpublished **[Project Final Report](https://github.com/danyalejandro/ogre3d-collisions/blob/master/computer-animation-project.pdf)**.
 
 ## Lessons learned
 
